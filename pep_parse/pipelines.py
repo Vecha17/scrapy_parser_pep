@@ -6,7 +6,7 @@ from pep_parse.constants import BASE_DIR, DATETIME_FORMAT
 
 class PepParsePipeline:
     peps: dict = {}
-    result = [('Статус', 'Количество'),]
+    result = [('Статус', 'Количество'), ]
 
     def open_spider(self, spider):
         pass
