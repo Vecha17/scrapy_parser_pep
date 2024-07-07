@@ -20,7 +20,7 @@ class PepSpider(scrapy.Spider):
 
     def parse_pep(self, response):
         status = response.css('dt:contains("Status") + dd abbr::text').get()
-        type = response.css('dt:contains("Type") + dd abbr::text').get()
+        type_ = response.css('dt:contains("Type") + dd abbr::text').get()
         data = {
             'number': int(
                 re.findall(
@@ -28,6 +28,6 @@ class PepSpider(scrapy.Spider):
                 )[0]
             ),
             'name': make_name(response.css('h1.page-title')),
-            'status': make_status(status, type),
+            'status': make_status(status, type_),
         }
         yield PepParseItem(data)

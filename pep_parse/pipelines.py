@@ -5,13 +5,14 @@ from pep_parse.constants import BASE_DIR, DATETIME_FORMAT
 
 
 class PepParsePipeline:
-    peps: dict = {}
-    result = [('Статус', 'Количество'), ]
 
     def open_spider(self, spider):
-        pass
+        self.peps = {}
+        self.result = [('Статус', 'Количество'), ]
+        self.total = 0
 
     def process_item(self, item, spider):
+        self.total += 1
         if item['status'] in self.peps:
             self.peps[item['status']] += 1
         else:
@@ -23,6 +24,7 @@ class PepParsePipeline:
             self.result.append(
                 (key, value)
             )
+        self.result.append(('Total', self.total))
         results_dir = BASE_DIR / 'results'
         results_dir.mkdir(exist_ok=True)
         now = dt.datetime.now()
