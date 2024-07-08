@@ -8,14 +8,8 @@ def make_status(status, type_):
     if status == 'Draft':
         status_pep = ''
     else:
-        try:
-            status_pep = status[0]
-        except Exception:
-            status_pep = ''
-    try:
-        type_pep = type_[0]
-    except Exception:
-        type_pep = ''
+        status_pep = status[0] if status else ''
+    type_pep = type_[0] if type_ else ''
     return type_pep + status_pep
 
 
